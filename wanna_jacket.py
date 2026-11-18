@@ -4,36 +4,36 @@
 # In[41]:
 
 
-def to_celcius(temperature, unit):
+def to_celsius(temperature, unit):
     '''
     (int/float, string) --> (int/float)
 
-    A function that converts (or preserves) an input tempreature, farenheit or celcius, to celcius. Returns a number which reperesents the tempreature in celcius.
+    A function that converts (or preserves) an input tempreature, farenheit or celsius, to celsius. Returns a number which reperesents the tempreature in celsius.
 
     - tempreature: A number (int of float)
-    - unit: a string, either "C" for celcius or "F" for farenheit (either upper of lowercase)
+    - unit: a string, either "C" for celsius or "F" for farenheit (either upper of lowercase)
 
-        >>> to_celcius(10, "C")
+        >>> to_celsius(10, "C")
         10
-        >>> to_celcius(40, "f")
+        >>> to_celsius(40, "f")
         4.444444444444445
     '''
     #normalize the unit string
     clean_unit = unit.strip().lower()
 
-    #determine the temperature in Celcius, depending on the unit of input temperature
+    #determine the temperature in celsius, depending on the unit of input temperature
     if clean_unit == "c":
-        celcius_temp = temperature
+        celsius_temp = temperature
     elif clean_unit == "f":
-        celcius_temp = (temperature - 32)*(5/9)
+        celsius_temp = (temperature - 32)*(5/9)
     else:
         print(unit, "is not a valid temperature unit")
         return None
 
-    return celcius_temp
+    return celsius_temp
 
-#print(to_celcius(10, "C"))
-#print(to_celcius(40, "f"))
+#print(to_celsius(10, "C"))
+#print(to_celsius(40, "f"))
 
 
 # In[54]:
@@ -46,7 +46,7 @@ def needs_jacket(temperature, unit, is_raining):
     A function that evaluates the weather conditions, temrpeature and rain, and returns a boolean value to determine if a jacket is needed.
 
     - temperature: A number (int or float)
-    - unit: a string, either "C" for Celcius or "F" for Fahrenheit (either upper or lowercase)
+    - unit: a string, either "C" for celsius or "F" for Fahrenheit (either upper or lowercase)
     - is_raining: a boolean, True if its is raining or otherwise false
 
         >>> needs_jacket(10, "C", False)
@@ -56,15 +56,15 @@ def needs_jacket(temperature, unit, is_raining):
         >>> needs_jacket(72.0, "F", True)
         False
     '''
-    #Call the Celcius conversion function to get the local temperature in Celcius
-    celcius_temp = to_celcius(temperature, unit)
+    #Call the celsius conversion function to get the local temperature in celsius
+    celsius_temp = to_celsius(temperature, unit)
 
     #Handle incorrect units
-    if celcius_temp is None:
+    if celsius_temp is None:
         return None
 
     #Determine if a jacket is needed or not
-    if celcius_temp < 15 or (is_raining == True and celcius_temp < 22):
+    if celsius_temp < 15 or (is_raining == True and celsius_temp < 22):
         return True
     else:
         return False
@@ -90,7 +90,7 @@ def jacket_message(temperature, unit, is_raining):
     A function that evaluates the weather conditions, temrpeature and rain, and returns a string giving advice for clothing and carrying an umbrella.
 
     - temperature: A number (int or float)
-    - unit: a string, either "C" for Celcius or "F" for Fahrenheit (either upper or lowercase)
+    - unit: a string, either "C" for celsius or "F" for Fahrenheit (either upper or lowercase)
     - is_raining: a boolean, True if its is raining or otherwise false
 
         >>> jacket_message(-5, "C", False)
@@ -100,15 +100,15 @@ def jacket_message(temperature, unit, is_raining):
         >>> jacket_message(10, "C", True)
         "Bring a jacket. Don't forget an umbrella."
     '''
-    #Call the Celcius conversion function to get the local temperature in Celcius
-    celcius_temp = to_celcius(temperature, unit)
+    #Call the celsius conversion function to get the local temperature in celsius
+    celsius_temp = to_celsius(temperature, unit)
 
     #Handle invalid units
-    if celcius_temp is None:
+    if celsius_temp is None:
         return None
 
     #Determine what piece of clothing is recommended based off the temperature and needs_jacket function
-    if celcius_temp < 0:
+    if celsius_temp < 0:
         clothing_advice = "Wear a winter coat."
     elif needs_jacket(temperature, unit, is_raining):
         clothing_advice = "Bring a jacket."
@@ -149,7 +149,7 @@ else:
     is_raining = False
 
 #Print the weather data and display the advice to the user using the functions
-print("Temperature in Celcius: " + str(round(to_celcius(temperature, unit), 1)))
+print("Temperature in celsius: " + str(round(to_celsius(temperature, unit), 1)))
 print("Bring a jacket: " + str(needs_jacket(temperature, unit, is_raining)))
 print("Advice: " + jacket_message(temperature, unit, is_raining))
 
